@@ -1,8 +1,7 @@
 <template>
     <v-row>
-        <v-col v-for="mobil in 4" :key="mobil">
+        <v-col v-for="item in mobil" :key="item.id_mobil">
             <v-card
-            :loading="loading"
             class="mx-auto"
             max-width="500"
             >
@@ -19,12 +18,12 @@
                 src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/s-l1600-1595356071.jpg?crop=1.00xw:0.754xh;0,0.140xh&resize=1200:*"
             ></v-img>
 
-            <v-card-title>Gallardo</v-card-title>
+            <v-card-title>{{ item.nama_mobil }}</v-card-title>
 
             <v-card-text>
 
                 <div class="mb-4 text-subtitle-1">
-                    100.000 $
+                    Rp {{ item.harga_jual }}
                 </div>
 
                 <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste ut accusamus assumenda iure sequi, aperiam inventore quia saepe dolorum dolorem laboriosam tempore, voluptatibus consectetur expedita ea officia? Ut, dicta nisi.</div>
@@ -35,14 +34,13 @@
             <!-- <v-card-title>Availability</v-card-title> -->
 
             <v-card-text>
-                <v-chip>Tersedia</v-chip>
+                <v-chip label>{{ item.status ? 'Terjual' : 'Tersedia' }}</v-chip>
             </v-card-text>
 
             <v-card-actions>
                 <v-btn
-                color="deep-green lighten-2"
-                text
-                @click="reserve"
+                block
+                v-if="item.status === false"
                 >
                 Reserve
                 </v-btn>
@@ -53,8 +51,36 @@
 </template>
 
 <script>
+import gql from 'graphql-tag'
+
 export default {
-    name: 'indexPage'
+    name: 'indexPage',    
+    data() {
+        return {
+
+        }
+    },
+    apollo: {
+        mobil: {
+        query(){
+            return gql`
+            query MyQuery {
+                mobil {
+                warna
+                tahun
+                status
+                nama_mobil
+                id_mobil
+                harga_jual
+                harga_beli
+                gambar
+                bahan_bakar
+                }
+            }
+            `
+        }
+        }
+    },
 }
 </script>
 
