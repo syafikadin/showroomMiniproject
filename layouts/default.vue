@@ -57,12 +57,12 @@ export default {
       drawer: false,
       items: [
         {
-          icon: 'mdi-car',
+          icon: 'mdi-home',
           title: 'Halaman Utama',
           to: '/',
         },
         {
-          icon: 'mdi-car',
+          icon: 'mdi-shield-account',
           title: 'Dashboard Admin',
           to: '/dashboard',
         },
@@ -70,16 +70,6 @@ export default {
           icon: 'mdi-car',
           title: 'Daftar Mobil',
           to: '/daftarMobil',
-        },
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/welcome',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
         },
       ],
       miniVariant: false,

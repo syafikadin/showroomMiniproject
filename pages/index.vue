@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col v-for="item in mobil" :key="item.id_mobil">
+        <v-col v-for="(item, index) in mobil" :key="item.id_mobil">
             <v-card
             class="mx-auto"
             max-width="500"
@@ -21,7 +21,6 @@
             <v-card-title>{{ item.nama_mobil }}</v-card-title>
 
             <v-card-text>
-
                 <div class="mb-4 text-subtitle-1">
                     Rp {{ item.harga_jual }}
                 </div>
@@ -38,12 +37,14 @@
             </v-card-text>
 
             <v-card-actions>
-                <v-btn
-                block
-                v-if="item.status === false"
-                >
-                Reserve
-                </v-btn>
+                <router-link :to="'/detailMobil' + index">
+                    <v-btn
+                    v-if="item.status === false"
+                    block
+                    >
+                        View Detail for Reserve
+                    </v-btn>
+                </router-link>
             </v-card-actions>
             </v-card>
         </v-col>

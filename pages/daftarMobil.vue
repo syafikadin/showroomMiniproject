@@ -17,7 +17,7 @@
 
     <v-row>
       <v-col>
-        <v-simple-table dark class="mt-6">
+        <v-simple-table dark class="mt-6" v-if="!isEditMode">
           <template v-slot:default>
             <thead>
               <tr>
@@ -47,14 +47,12 @@
                 </th>
               </tr>
             </thead>
+
             <tbody class="text-center">
               <tr v-if="$apollo.loading">Loading ...</tr>
               <tr
-                v-for="item in mobil" :key="item.id_mobil"
-              >
+                v-for="item in mobil" :key="item.id_mobil">
                 <td>{{ item.id_mobil }}</td>
-                <!-- String literal -->
-                <!-- <td><img :src="require(`~/assets/img/${item.gambar}.jpg`)" /></td> -->
                 <td><img src="../assets/img/avanza001.png" alt=""></td>
                 <td>{{ item.nama_mobil }}</td>
                 <td>{{ item.warna }}</td>
@@ -62,13 +60,25 @@
                 <td>Rp. {{ item.harga_jual }}</td>
                 <td>{{ item.status ? 'Terjual' : 'Tersedia' }}</td>
                 <td>
+
                   <v-icon
+                    v-if="!isEditMode"
                     medium
                     class="mr-2"
-                    @click="editItem(item)"
+                    @click="setEditMode(item.id_mobil, item.nama_mobil, item.warna, item.harga_beli, item.harga_jual, item.tahun, item.bahan_bakar, item.status)"
                   >
                     mdi-pencil
                   </v-icon>
+
+                  <v-icon
+                    v-else
+                    medium
+                    class="mr-2"
+                    @click="unsetEditMode()"
+                  >
+                    mdi-check
+                  </v-icon>
+
                   <v-icon
                     medium
                     @click="deleteMobil(item.id_mobil)"
@@ -78,8 +88,80 @@
                 </td>
               </tr>
             </tbody>
+
           </template>
         </v-simple-table>
+
+        <v-simple-table dark class="mt-6" v-else>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-center">
+                  ID
+                </th>
+                <th class="text-center">
+                  Gambar
+                </th>
+                <th class="text-center">
+                  Nama Mobil
+                </th>
+                <th class="text-center">
+                  Warna
+                </th>
+                <th class="text-center">
+                  Harga Beli
+                </th>
+                <th class="text-center">
+                  Harga Jual
+                </th>
+                <th class="text-center">
+                  Tahun
+                </th>
+                <th class="text-center">
+                  Bahan Bakar 
+                </th>
+                <th class="text-center">
+                  Status
+                </th>
+                <th class="text-center">
+                  Aksi
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="text-center">
+              <tr v-if="$apollo.loading">Loading ...</tr>
+              <tr>
+                <td>{{ idMobil }}</td>
+                <td><img src="../assets/img/avanza001.png" alt=""></td>
+                <td><v-text-field v-model="editName" label="Nama Mobil"></v-text-field></td>
+                <td><v-text-field v-model="editColor" label="Warna Mobil"></v-text-field></td>
+                <td><v-text-field v-model="editPurchasePrice" label="Harga Beli"></v-text-field></td>
+                <td><v-text-field v-model="editSellPrice" label="Harga Jual"></v-text-field></td>
+                <td><v-text-field v-model="editYear" label="Tahun"></v-text-field></td>
+                <td><v-text-field v-model="editFuel" label="Bahan Bakar"></v-text-field></td>
+                <td>
+                  <v-radio-group v-model="editStatus" row>
+                    <v-radio label="Terjual" :value="true"></v-radio>
+                    <v-radio label="Belum" :value="false"></v-radio>
+                  </v-radio-group>
+                </td>
+
+                <td>
+                  <v-icon
+                    medium
+                    class="mr-2"
+                    @click="unsetEditMode()"
+                  >
+                    mdi-check
+                  </v-icon>
+                </td>
+              </tr>
+            </tbody>
+
+          </template>
+        </v-simple-table>
+        
       </v-col>
     </v-row>
   </v-container>
@@ -91,7 +173,16 @@ import gql from 'graphql-tag'
 export default {
   data() {
     return {
-
+      idMobil: '',
+      isEditMode: false,
+      editName: '',
+      editColor: '',
+      editPurchasePrice: '',
+      editSellPrice: '',
+      editStatus: false,
+      editYear: '',
+      editFuel:'' ,
+      indexNumber: ''
     }
   },
 
@@ -119,6 +210,22 @@ export default {
   },
 
   methods: {
+    setEditMode(id, name, color, purchasePrice, sellPrice, year, fuel, status){
+      this.isEditMode = true
+      this.idMobil = id
+      this.editName = name
+      this.editColor = color
+      this.editPurchasePrice = purchasePrice
+      this.editSellPrice = sellPrice
+      this.editYear = year
+      this.editFuel = fuel
+      this.editStatus = status
+    },
+
+    unsetEditMode(){
+      this.isEditMode = false
+    },
+
     deleteMobil(inputId){
       confirm('Apakah Anda Akan Menghapus Data Ini?')
       this.$apollo.mutate({
@@ -146,7 +253,6 @@ export default {
     }
 
   }
-
 
 }
 </script>
