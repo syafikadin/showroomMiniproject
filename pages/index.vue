@@ -1,9 +1,22 @@
 <template>
     <v-row>
+
+        <!-- <v-carousel>
+            <v-carousel-item
+            v-for="item in mobil"
+            :key="item.id_mobil"
+            :src="item.gambar"
+            reverse-transition="fade-transition"
+            transition="fade-transition"
+            ></v-carousel-item>
+        </v-carousel> -->
+
         <v-col v-for="(item, index) in mobil" :key="item.id_mobil">
+
             <v-card
             class="mx-auto"
             max-width="500"
+            height="420"
             >
             <template slot="progress">
                 <v-progress-linear
@@ -14,8 +27,9 @@
             </template>
 
             <v-img
-                height="250"
-                src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/s-l1600-1595356071.jpg?crop=1.00xw:0.754xh;0,0.140xh&resize=1200:*"
+                class="mx-auto"
+                max-width="200"
+                :src="item.gambar"
             ></v-img>
 
             <v-card-title>{{ item.nama_mobil }}</v-card-title>
@@ -25,7 +39,9 @@
                     Rp {{ item.harga_jual }}
                 </div>
 
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste ut accusamus assumenda iure sequi, aperiam inventore quia saepe dolorum dolorem laboriosam tempore, voluptatibus consectetur expedita ea officia? Ut, dicta nisi.</div>
+                <div class="text-subtitle-1">
+                    Tahun : {{ item.tahun }}
+                </div>
             </v-card-text>
 
             <v-divider class="mx-4"></v-divider>
@@ -37,14 +53,13 @@
             </v-card-text>
 
             <v-card-actions>
-                <router-link :to="'/detailMobil' + index">
-                    <v-btn
-                    v-if="item.status === false"
-                    block
-                    >
-                        View Detail for Reserve
-                    </v-btn>
-                </router-link>
+                <v-btn
+                v-if="item.status === false"
+                block
+                :to="'/detailMobil' + index"
+                >
+                    View Detail for Reserve
+                </v-btn>
             </v-card-actions>
             </v-card>
         </v-col>

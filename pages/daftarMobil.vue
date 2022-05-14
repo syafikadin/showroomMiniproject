@@ -53,7 +53,7 @@
               <tr
                 v-for="item in mobil" :key="item.id_mobil">
                 <td>{{ item.id_mobil }}</td>
-                <td><img src="../assets/img/avanza001.png" alt=""></td>
+                <td><img :src="item.gambar" alt=""></td>
                 <td>{{ item.nama_mobil }}</td>
                 <td>{{ item.warna }}</td>
                 <td>Rp. {{ item.harga_beli }}</td>
