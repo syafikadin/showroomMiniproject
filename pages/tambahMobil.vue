@@ -1,6 +1,12 @@
 <template>
     <v-row>
         <v-col>
+            <v-btn
+            to="/daftarMobil"
+            class="mb-4"
+            >
+                Kembali
+            </v-btn>
             <h1 class="text-center">Tambah Data Mobil</h1>
             <v-form @submit.prevent="createMobil">
                 <v-text-field

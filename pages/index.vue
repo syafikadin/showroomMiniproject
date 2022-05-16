@@ -76,6 +76,12 @@ export default {
 
         }
     },
+    computed: {
+        indexNumber() {
+            return this.$store.state.indexNumber
+        }
+    },
+
     apollo: {
         mobil: {
         query(){

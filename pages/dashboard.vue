@@ -17,7 +17,7 @@
                     </v-card-title>
 
                     <v-card-subtitle>
-                    1,000 miles of wonder
+                        {{ mobil }}
                     </v-card-subtitle>
 
                     <v-card-actions>
@@ -150,7 +150,7 @@ export default {
     name: 'dashboardPage',
     data(){
         return {
-
+            data: '',
         }
     },
     apollo: {

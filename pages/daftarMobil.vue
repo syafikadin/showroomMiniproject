@@ -7,11 +7,12 @@
     <v-row>
       <v-col>
         <h2>Tambah Mobil</h2>
-        <Router-Link to="/tambahMobil">
-          <v-btn class="mt-4">
-            <v-icon class="">mdi-plus-circle-outline</v-icon>
-          </v-btn>
-        </Router-Link>
+        <v-btn 
+        class="mt-4"
+        to="/tambahMobil"
+        >
+          <v-icon class="">mdi-plus-circle-outline</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
 

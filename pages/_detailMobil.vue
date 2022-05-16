@@ -2,7 +2,13 @@
     <v-row>
         <v-col>
             <h1>Detail Mobil</h1>
-            <v-simple-table dark>
+            <v-btn
+            to="/"
+            class="mt-4"
+            >
+                Kembali
+            </v-btn>
+            <v-simple-table dark class="mt-5">
                 <template v-slot:default>
                 <!-- <thead>
                     <tr>
@@ -13,7 +19,7 @@
                 </thead> -->
                 <tbody>
                     <tr>
-                        <td class="text-center" colspan="2"><img :src="mobil[indexNumber].gambar" alt="" width="250px"></td>
+                        <td class="text-center" colspan="2"><img :src="mobil[indexNumber].gambar" alt="Mobil" width="600"></td>
                     </tr>
                     <tr>
                         <td>ID Mobil</td>
@@ -50,6 +56,11 @@
                 </tbody>
                 </template>
             </v-simple-table>
+            <v-btn class="mt-6"
+            to="/formTransaksi"
+            >Beli Sekarang
+
+            </v-btn>
         </v-col>
     </v-row>
 
