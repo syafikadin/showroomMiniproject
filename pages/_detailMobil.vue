@@ -34,10 +34,6 @@
                         <td>{{ mobil[indexNumber].warna }}</td>
                     </tr>
                     <tr>
-                        <td>Harga Beli</td>
-                        <td>Rp. {{ mobil[indexNumber].harga_beli }}</td>
-                    </tr>
-                    <tr>
                         <td>Harga Jual</td>
                         <td>Rp. {{ mobil[indexNumber].harga_jual }}</td>
                     </tr>
@@ -57,9 +53,8 @@
                 </template>
             </v-simple-table>
             <v-btn class="mt-6"
-            to="/formTransaksi"
+            to="/formTransaksiCust"
             >Beli Sekarang
-
             </v-btn>
         </v-col>
     </v-row>
@@ -96,7 +91,6 @@ export default {
                             nama_mobil
                             id_mobil
                             harga_jual
-                            harga_beli
                             gambar
                             bahan_bakar
                         }
